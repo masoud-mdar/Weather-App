@@ -4,47 +4,58 @@ import BASE_URL from "../constants"
 
 
 const App = () => {
+    const [adress, setAdress] = useState("")
+
+    useEffect(() => {
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+
+                let lon = position.coords.longitude
+                let lat = position.coords.latitude
+
+                let sendingData = {
+                    lon: lon,
+                    lat: lat
+                }
+
+                axios.post(`${BASE_URL}/api/weather/local`, sendingData).then(response => {
+                    const {data} = response
+                    console.log(data)
+                })
+            })
+
+        }
+    }, [])
+
+    const handleChange = (Event) => {
+        const {name, value} = Event.target
+
+        if (name === "coords") {
+            setAdress(value)
+        }
+    }
 
     const handleClick = (Event) => {
         const {name} = Event.target
-        console.log(name)
 
-        if (name === "coor-demand") {
-
-            let lon = ""
-            let lat = ""
-            let sendingData = {}
-
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition((position) => {
-                    console.log(position.coords.latitude)
-                    console.log(position.coords.longitude)
-
-                    lon = position.coords.longitude
-                    lat = position.coords.latitude
-
-                    sendingData = {
-                        lon: lon,
-                        lat: lat
-                    }
-
-                    axios.post(`${BASE_URL}/api/weather/local`, sendingData).then(response => {
-                        const {data} = response
-                        console.log(data)
-                    })
-                })
-
+        if (name === "coor-submit") {
+            let sendingData = {
+                adress: adress
             }
 
-
-
+            axios.post(`${BASE_URL}/api/weather/custom`, sendingData).then(response => {
+                const {data} = response
+                console.log(data)
+            })
         }
     }
 
 
     return (
         <div>
-            <button name="coor-demand" onClick={handleClick}>click to know coordinates</button>
+            <input name="coords" onChange={handleChange} value={adress} placeholder="Enter your location"></input>
+            <button name="coor-submit" onClick={handleClick}>click to know coordinates</button>
         </div>
     )
 }

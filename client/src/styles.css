@@ -43,21 +43,40 @@ img {
     background-image: linear-gradient(45deg,#008fa7, #008ea77a);
 }
 
-.general-info {
-    position: relative;
-    width: 25vw;
-    height: 60vh;
-    margin-top: 5vh;
-    margin-left: 10vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    background-image: linear-gradient(45deg, #32c6ce27, #1cb4c269);
-    border-radius: 2px;
-    z-index: 2;
+@media only screen and (min-width: 649px) {
+    .general-info {
+        position: relative;
+        width: 25vw;
+        height: 60vh;
+        margin-top: 5vh;
+        margin-left: 10vw;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        background-image: linear-gradient(45deg, #32c6ce27, #1cb4c269);
+        border-radius: 2px;
+        z-index: 2;
+    
+    }
 
+    .min-max {
+        display: flex;
+        align-items: center;
+    }
 }
+
+@media only screen and (max-width: 649px) {
+    .general-info {
+        display: none;
+    }
+
+    .min-max {
+        display: none;
+    }
+}
+
+
 
 .general-info h2 {
     font-weight: bolder;
@@ -140,10 +159,6 @@ img {
     justify-content: space-around;
 }
 
-.min-max {
-    display: flex;
-    align-items: center;
-}
 
 .temp-main {
     width: 30vw;

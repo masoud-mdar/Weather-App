@@ -12,6 +12,7 @@ const App = () => {
     const [maxTemp, setMaxTemp] = useState("")
     const [descrip, setDescrip] = useState("")
     const [humid, setHumid] = useState("")
+    const [wind, setWind] = useState("")
 
     useEffect(() => {
 
@@ -36,6 +37,7 @@ const App = () => {
                     setMinTemp(data.main.temp_min)
                     setMaxTemp(data.main.temp_max)
                     setHumid(data.main.humidity)
+                    setWind(data.wind.speed)
                     setAdress("")
                 })
             })
@@ -70,6 +72,7 @@ const App = () => {
                 setMinTemp(data.main.temp_min)
                 setMaxTemp(data.main.temp_max)
                 setHumid(data.main.humidity)
+                setWind(data.wind.speed)
                 setAdress("")
             })
         }
@@ -79,7 +82,27 @@ const App = () => {
     return (
         <div className="container">
             <div className="info-part">
-                <div className="general-info"></div>
+                <div className="general-info">
+                    <div className="city-name">
+                        <h2>
+                            {
+                                city
+                            }
+                        </h2>
+                    </div>
+                    <div className="date"></div>
+                    <div className="wind">
+                        <h2>
+                            wind {wind}
+                        </h2>
+                    </div>
+                    <div className="humidity">
+                        <h2>
+                            {humid} %
+                        </h2>
+                    </div>
+                    <div className="cover"></div>
+                </div>
                 <div className="weather-info"></div>
             </div>
 

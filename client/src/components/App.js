@@ -32,12 +32,12 @@ const App = () => {
                     console.log(data)
                     setCity(data.name)
                     setWeather(data.weather[0].main)
-                    setDescrip(data.weather[0].description)
+                    setDescrip((data.weather[0].description).toUpperCase())
                     setTemp(Math.floor(data.main.temp))
                     setMinTemp(Math.floor(data.main.temp_min))
                     setMaxTemp(Math.floor(data.main.temp_max))
                     setHumid(data.main.humidity)
-                    setWind(data.wind.speed)
+                    setWind(Math.floor(data.wind.speed))
                     setAdress("")
                 })
             })
@@ -67,12 +67,12 @@ const App = () => {
                 console.log(data.name)
                 setCity(data.name)
                 setWeather(data.weather[0].main)
-                setDescrip(data.weather[0].description)
+                setDescrip((data.weather[0].description).toUpperCase())
                 setTemp(Math.floor(data.main.temp))
                 setMinTemp(Math.floor(data.main.temp_min))
                 setMaxTemp(Math.floor(data.main.temp_max))
                 setHumid(data.main.humidity)
-                setWind(data.wind.speed)
+                setWind(Math.floor(data.wind.speed))
                 setAdress("")
             })
         }
@@ -90,10 +90,14 @@ const App = () => {
                             }
                         </h2>
                     </div>
-                    <div className="date"></div>
+                    <div className="date">
+                        <h2>
+                            date
+                        </h2>
+                    </div>
                     <div className="wind">
                         <h2>
-                            wind {wind}
+                            wind {wind} km/h
                         </h2>
                     </div>
                     <div className="humidity">
@@ -108,28 +112,24 @@ const App = () => {
                         <div className="temp-min-max">
                             <div className="temp-min">
                                 <h2>
-                                    {
-                                        minTemp
-                                    }
+                                    {minTemp}°
                                 </h2>
                             </div>
                             <div className="temp-max">
                                 <h2>
-                                    {
-                                        maxTemp
-                                    }
+                                    {maxTemp}°
                                 </h2>
                             </div>
                         </div>
                         <div className="temp-main">
                             <h2>
-                                {
-                                    temp
-                                }
+                                {temp}°
                             </h2>
                         </div>
                     </div>
-                    <div className="icon-part"></div>
+                    <div className="icon-part">
+                        <h2>icon</h2>
+                    </div>
                     <div className="description">
                         <h2>
                             {

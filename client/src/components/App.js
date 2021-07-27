@@ -29,6 +29,14 @@ const App = () => {
                 axios.post(`${BASE_URL}/api/weather/local`, sendingData).then(response => {
                     const {data} = response
                     console.log(data)
+                    setCity(data.name)
+                    setWeather(data.weather[0].main)
+                    setDescrip(data.weather[0].description)
+                    setTemp(data.main.temp)
+                    setMinTemp(data.main.temp_min)
+                    setMaxTemp(data.main.temp_max)
+                    setHumid(data.main.humidity)
+                    setAdress("")
                 })
             })
 
@@ -57,10 +65,10 @@ const App = () => {
                 console.log(data.name)
                 setCity(data.name)
                 setWeather(data.weather[0].main)
+                setDescrip(data.weather[0].description)
                 setTemp(data.main.temp)
                 setMinTemp(data.main.temp_min)
                 setMaxTemp(data.main.temp_max)
-                setDescrip(data.weather[0].description)
                 setHumid(data.main.humidity)
                 setAdress("")
             })
@@ -69,9 +77,17 @@ const App = () => {
 
 
     return (
-        <div>
-            <input name="coords" onChange={handleChange} value={adress} placeholder="Enter your location"></input>
-            <button name="coor-submit" onClick={handleClick}>click to know coordinates</button>
+        <div className="container">
+            <div className="info-part">
+                <div className="general-info"></div>
+                <div className="weather-info"></div>
+            </div>
+
+            <div className="search-part">
+                <input name="coords" onChange={handleChange} value={adress} placeholder="Enter your location"></input>
+                <button name="coor-submit" onClick={handleClick}>click to know coordinates</button>
+            </div>
+
         </div>
     )
 }

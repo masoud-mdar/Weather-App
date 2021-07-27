@@ -7,13 +7,14 @@ const App = () => {
     const [adress, setAdress] = useState("")
     const [logoKey, setLogoKey] = useState("")
     const [city, setCity] = useState("")
+    const [country, setCountry] = useState("")
     const [temp, setTemp] = useState("")
     const [minTemp, setMinTemp] = useState("")
     const [maxTemp, setMaxTemp] = useState("")
     const [descrip, setDescrip] = useState("")
     const [humid, setHumid] = useState("")
     const [wind, setWind] = useState("")
-    //const [icon, setIcon] = useState("")
+    
 
     useEffect(() => {
 
@@ -31,7 +32,9 @@ const App = () => {
                 axios.post(`${BASE_URL}/api/weather/local`, sendingData).then(response => {
                     const {data} = response
                     console.log(data)
+
                     setCity(data.name)
+                    setCountry(data.sys.country)
                     setDescrip((data.weather[0].description).toUpperCase())
                     setTemp(Math.floor(data.main.temp))
                     setMinTemp(Math.floor(data.main.temp_min))
@@ -43,7 +46,11 @@ const App = () => {
                     let weather = (data.weather[0].main).toLowerCase()
 
                     if (/clear/.test(weather)) {
-                        setLogoKey("clear")
+                        if (parseInt(Math.floor(data.main.temp)) < 30) {
+                            setLogoKey("clear")
+                        } else {
+                            setLogoKey("heatwave")
+                        }
                     } else if (/cloud/.test(weather)) {
                         setLogoKey("cloud")
                     } else if (/snow/.test(weather)) {
@@ -76,8 +83,9 @@ const App = () => {
             axios.post(`${BASE_URL}/api/weather/custom`, sendingData).then(response => {
                 const {data} = response
                 console.log(data)
-                console.log(data.name)
+
                 setCity(data.name)
+                setCountry(data.sys.country)
                 setDescrip((data.weather[0].description).toUpperCase())
                 setTemp(Math.floor(data.main.temp))
                 setMinTemp(Math.floor(data.main.temp_min))
@@ -90,13 +98,24 @@ const App = () => {
                 console.log(weather, "weather")
 
                 if (/clear/.test(weather)) {
-                    setLogoKey("clear")
+                    if (parseInt(Math.floor(data.main.temp)) < 30) {
+                        setLogoKey("clear")
+                    } else {
+                        setLogoKey("heatwave")
+                    }
+                    
                 } else if (/cloud/.test(weather)) {
                     setLogoKey("cloud")
                 } else if (/snow/.test(weather)) {
                     setLogoKey("snow")
                 } else if (/rain/.test(weather)) {
                     setLogoKey("rain")
+                } else if (/wind/.test(weather)) {
+                    setLogoKey("windy")
+                } else if (/fog/.test(weather)) {
+                    setLogoKey("fog")
+                } else if (/thunder/.test(weather)) {
+                    setLogoKey("thunder")
                 }
             })
         }
@@ -112,7 +131,7 @@ const App = () => {
                     <div className="city-name">
                         <h2>
                             {
-                                city
+                                `${city}, ${country}`
                             }
                         </h2>
                     </div>
@@ -122,12 +141,13 @@ const App = () => {
                         </h2>
                     </div>
                     <div className="wind">
-                        <img src="/images/wind.png" alt="wind logo"></img>
+                        <img src="images/wind.png" alt="wind logo"></img>
                         <h2>
                             {wind} km/h
                         </h2>
                     </div>
                     <div className="humidity">
+                        <img src="images/humidity.png" alt="humidity icon"></img>
                         <h2>
                             {humid} %
                         </h2>

@@ -222,8 +222,8 @@ const App = () => {
             </div>
 
             <div className="search-part">
-                <input name="coords" onChange={handleChange} value={adress} placeholder="Enter your location"></input>
-                <button name="coor-submit" onClick={handleClick}>click to know coordinates</button>
+                <input name="coords" onChange={handleChange} value={adress} placeholder="Enter an adress..."></input>
+                <button name="coor-submit" onClick={handleClick}>Show the weather</button>
             </div>
 
         </div>

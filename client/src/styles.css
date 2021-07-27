@@ -37,7 +37,7 @@ img {
 
 .info-part {
     width: 100%;
-    height: 75vh;
+    height: 70vh;
     display: flex;
     justify-content: space-evenly;
     background-image: linear-gradient(45deg,#008fa7, #008ea77a);
@@ -47,7 +47,7 @@ img {
     position: relative;
     width: 25vw;
     height: 60vh;
-    margin-top: 10vh;
+    margin-top: 5vh;
     margin-left: 10vw;
     display: flex;
     flex-direction: column;
@@ -116,7 +116,7 @@ img {
 .weather-info {
     width: 40vw;
     height: 60vh;
-    margin-top: 10vh;
+    margin-top: 5vh;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
@@ -166,3 +166,44 @@ img {
     align-items: center;
 }
 
+.search-part {
+    width: 100%;
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-image: linear-gradient(45deg,#008fa7, #008ea77a);
+}
+
+.search-part input {
+    width: 15vw;
+    height: 7vh;
+    padding: 5px;
+    background: none;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+.search-part input::placeholder {
+    font-family: monospace;
+    font-weight: bold;
+    color: white;
+}
+
+.search-part button {
+    width: 10vw;
+    height: 7vh;
+    background: none;
+    border: 1px solid white;
+    border-radius: 5px;
+    font-family: monospace;
+    font-weight: bold;
+    color: white;
+    transition: 300ms;
+}
+
+.search-part button:hover {
+    color: tomato;
+    border-color: teal;
+}

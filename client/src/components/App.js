@@ -33,9 +33,9 @@ const App = () => {
                     setCity(data.name)
                     setWeather(data.weather[0].main)
                     setDescrip(data.weather[0].description)
-                    setTemp(data.main.temp)
-                    setMinTemp(data.main.temp_min)
-                    setMaxTemp(data.main.temp_max)
+                    setTemp(Math.floor(data.main.temp))
+                    setMinTemp(Math.floor(data.main.temp_min))
+                    setMaxTemp(Math.floor(data.main.temp_max))
                     setHumid(data.main.humidity)
                     setWind(data.wind.speed)
                     setAdress("")
@@ -68,9 +68,9 @@ const App = () => {
                 setCity(data.name)
                 setWeather(data.weather[0].main)
                 setDescrip(data.weather[0].description)
-                setTemp(data.main.temp)
-                setMinTemp(data.main.temp_min)
-                setMaxTemp(data.main.temp_max)
+                setTemp(Math.floor(data.main.temp))
+                setMinTemp(Math.floor(data.main.temp_min))
+                setMaxTemp(Math.floor(data.main.temp_max))
                 setHumid(data.main.humidity)
                 setWind(data.wind.speed)
                 setAdress("")
@@ -103,7 +103,41 @@ const App = () => {
                     </div>
                     <div className="cover"></div>
                 </div>
-                <div className="weather-info"></div>
+                <div className="weather-info">
+                    <div className="temp-part">
+                        <div className="temp-min-max">
+                            <div className="temp-min">
+                                <h2>
+                                    {
+                                        minTemp
+                                    }
+                                </h2>
+                            </div>
+                            <div className="temp-max">
+                                <h2>
+                                    {
+                                        maxTemp
+                                    }
+                                </h2>
+                            </div>
+                        </div>
+                        <div className="temp-main">
+                            <h2>
+                                {
+                                    temp
+                                }
+                            </h2>
+                        </div>
+                    </div>
+                    <div className="icon-part"></div>
+                    <div className="description">
+                        <h2>
+                            {
+                                descrip
+                            }
+                        </h2>
+                    </div>
+                </div>
             </div>
 
             <div className="search-part">

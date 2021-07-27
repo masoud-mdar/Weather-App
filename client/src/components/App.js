@@ -5,6 +5,13 @@ import BASE_URL from "../constants"
 
 const App = () => {
     const [adress, setAdress] = useState("")
+    const [weather, setWeather] = useState("")
+    const [city, setCity] = useState("")
+    const [temp, setTemp] = useState("")
+    const [minTemp, setMinTemp] = useState("")
+    const [maxTemp, setMaxTemp] = useState("")
+    const [descrip, setDescrip] = useState("")
+    const [humid, setHumid] = useState("")
 
     useEffect(() => {
 
@@ -47,6 +54,15 @@ const App = () => {
             axios.post(`${BASE_URL}/api/weather/custom`, sendingData).then(response => {
                 const {data} = response
                 console.log(data)
+                console.log(data.name)
+                setCity(data.name)
+                setWeather(data.weather[0].main)
+                setTemp(data.main.temp)
+                setMinTemp(data.main.temp_min)
+                setMaxTemp(data.main.temp_max)
+                setDescrip(data.weather[0].description)
+                setHumid(data.main.humidity)
+                setAdress("")
             })
         }
     }

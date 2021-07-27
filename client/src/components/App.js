@@ -14,6 +14,9 @@ const App = () => {
     const [descrip, setDescrip] = useState("")
     const [humid, setHumid] = useState("")
     const [wind, setWind] = useState("")
+
+    const [day, setDay] = useState("")
+    const [date, setDate] = useState("")
     
 
     useEffect(() => {
@@ -42,6 +45,14 @@ const App = () => {
                     setHumid(data.main.humidity)
                     setWind(Math.floor(data.wind.speed))
                     setAdress("")
+
+                    let dateStr = new Date()
+                    let dateArr = dateStr.toDateString().split(" ")
+
+                    setDay(dateArr.shift())
+                    setDate(dateArr.join(" "))
+
+                    
 
                     let weather = (data.weather[0].main).toLowerCase()
 
@@ -94,6 +105,12 @@ const App = () => {
                 setWind(Math.floor(data.wind.speed))
                 setAdress("")
 
+                let dateStr = new Date()
+                let dateArr = dateStr.toDateString().split(" ")
+
+                setDay(dateArr.shift())
+                setDate(dateArr.join(" "))
+
                 let weather = (data.weather[0].main).toLowerCase()
                 console.log(weather, "weather")
 
@@ -121,11 +138,15 @@ const App = () => {
         }
     }
 
-    console.log(logoKey)
 
 
     return (
         <div className="container">
+            <div className="title">
+                <h1>
+                    Weather App
+                </h1>
+            </div>
             <div className="info-part">
                 <div className="general-info">
                     <div className="city-name">
@@ -135,10 +156,21 @@ const App = () => {
                             }
                         </h2>
                     </div>
-                    <div className="date">
-                        <h2>
-                            date
-                        </h2>
+                    <div className="date-wrapper">
+                        <div className="day">
+                            <h2>
+                                {
+                                    day
+                                }
+                            </h2>
+                        </div>
+                        <div className="date">
+                            <h2>
+                                {
+                                    date
+                                }
+                            </h2>
+                        </div>
                     </div>
                     <div className="wind">
                         <img src="images/wind.png" alt="wind logo"></img>

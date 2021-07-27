@@ -8,6 +8,11 @@ h2 {
     color: white;
 }
 
+img {
+    width: 50%;
+    margin-right: 1vw;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -40,7 +45,18 @@ h2 {
 
 .general-info h2 {
     font-weight: bolder;
+    font-family: monospace;
     color: white;
+}
+
+.wind {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+
+.wind h2 {
+    width: 7vw;
 }
 
 .cover {
@@ -63,6 +79,7 @@ h2 {
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
+    font-family: monospace;
 }
 
 .temp-part {
@@ -81,12 +98,29 @@ h2 {
     justify-content: space-around;
 }
 
+.min-max {
+    display: flex;
+    align-items: center;
+}
+
 .temp-main {
     width: 30vw;
     height: 15vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 32px;
+    font-size: 48px;
+}
+
+.icon-part {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.description {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 

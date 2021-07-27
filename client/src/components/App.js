@@ -5,7 +5,7 @@ import BASE_URL from "../constants"
 
 const App = () => {
     const [adress, setAdress] = useState("")
-    const [weather, setWeather] = useState("")
+    const [logoKey, setLogoKey] = useState("")
     const [city, setCity] = useState("")
     const [temp, setTemp] = useState("")
     const [minTemp, setMinTemp] = useState("")
@@ -13,6 +13,7 @@ const App = () => {
     const [descrip, setDescrip] = useState("")
     const [humid, setHumid] = useState("")
     const [wind, setWind] = useState("")
+    //const [icon, setIcon] = useState("")
 
     useEffect(() => {
 
@@ -31,7 +32,6 @@ const App = () => {
                     const {data} = response
                     console.log(data)
                     setCity(data.name)
-                    setWeather(data.weather[0].main)
                     setDescrip((data.weather[0].description).toUpperCase())
                     setTemp(Math.floor(data.main.temp))
                     setMinTemp(Math.floor(data.main.temp_min))
@@ -39,6 +39,18 @@ const App = () => {
                     setHumid(data.main.humidity)
                     setWind(Math.floor(data.wind.speed))
                     setAdress("")
+
+                    let weather = (data.weather[0].main).toLowerCase()
+
+                    if (/clear/.test(weather)) {
+                        setLogoKey("clear")
+                    } else if (/cloud/.test(weather)) {
+                        setLogoKey("cloud")
+                    } else if (/snow/.test(weather)) {
+                        setLogoKey("snow")
+                    } else if (/rain/.test(weather)) {
+                        setLogoKey("rain")
+                    }
                 })
             })
 
@@ -66,7 +78,6 @@ const App = () => {
                 console.log(data)
                 console.log(data.name)
                 setCity(data.name)
-                setWeather(data.weather[0].main)
                 setDescrip((data.weather[0].description).toUpperCase())
                 setTemp(Math.floor(data.main.temp))
                 setMinTemp(Math.floor(data.main.temp_min))
@@ -74,9 +85,24 @@ const App = () => {
                 setHumid(data.main.humidity)
                 setWind(Math.floor(data.wind.speed))
                 setAdress("")
+
+                let weather = (data.weather[0].main).toLowerCase()
+                console.log(weather, "weather")
+
+                if (/clear/.test(weather)) {
+                    setLogoKey("clear")
+                } else if (/cloud/.test(weather)) {
+                    setLogoKey("cloud")
+                } else if (/snow/.test(weather)) {
+                    setLogoKey("snow")
+                } else if (/rain/.test(weather)) {
+                    setLogoKey("rain")
+                }
             })
         }
     }
+
+    console.log(logoKey)
 
 
     return (
@@ -96,8 +122,9 @@ const App = () => {
                         </h2>
                     </div>
                     <div className="wind">
+                        <img src="/images/wind.png" alt="wind logo"></img>
                         <h2>
-                            wind {wind} km/h
+                            {wind} km/h
                         </h2>
                     </div>
                     <div className="humidity">
@@ -110,12 +137,14 @@ const App = () => {
                 <div className="weather-info">
                     <div className="temp-part">
                         <div className="temp-min-max">
-                            <div className="temp-min">
+                            <div className="temp-min min-max">
+                                <img src="images/minTemp.png" alt="min temperature logo"></img>
                                 <h2>
                                     {minTemp}°
                                 </h2>
                             </div>
-                            <div className="temp-max">
+                            <div className="temp-max min-max">
+                                <img src="images/maxTemp.png" alt="max temperature logo"></img>
                                 <h2>
                                     {maxTemp}°
                                 </h2>
@@ -128,7 +157,7 @@ const App = () => {
                         </div>
                     </div>
                     <div className="icon-part">
-                        <h2>icon</h2>
+                        <img src={`images/${logoKey}.png`} alt="weather-logo"></img>
                     </div>
                     <div className="description">
                         <h2>

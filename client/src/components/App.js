@@ -94,44 +94,54 @@ const App = () => {
             axios.post(`${BASE_URL}/api/weather/custom`, sendingData).then(response => {
                 const {data} = response
 
-                setCity(data.name)
-                setCountry(data.sys.country)
-                setDescrip((data.weather[0].description).toUpperCase())
-                setTemp(Math.floor(data.main.temp))
-                setMinTemp(Math.floor(data.main.temp_min))
-                setMaxTemp(Math.floor(data.main.temp_max))
-                setHumid(data.main.humidity)
-                setWind(Math.floor(data.wind.speed))
-                setAdress("")
+                if (!data.hasOwnProperty("error")) {
 
-                let dateStr = new Date()
-                let dateArr = dateStr.toDateString().split(" ")
+                    setCity(data.name)
+                    setCountry(data.sys.country)
+                    setDescrip((data.weather[0].description).toUpperCase())
+                    setTemp(Math.floor(data.main.temp))
+                    setMinTemp(Math.floor(data.main.temp_min))
+                    setMaxTemp(Math.floor(data.main.temp_max))
+                    setHumid(data.main.humidity)
+                    setWind(Math.floor(data.wind.speed))
+                    setAdress("")
 
-                setDay(dateArr.shift())
-                setDate(dateArr.join(" "))
+                    let dateStr = new Date()
+                    let dateArr = dateStr.toDateString().split(" ")
+    
+                    setDay(dateArr.shift())
+                    setDate(dateArr.join(" "))
+    
+                    let weather = (data.weather[0].main).toLowerCase()
 
-                let weather = (data.weather[0].main).toLowerCase()
 
-                if (/clear/.test(weather)) {
-                    if (parseInt(Math.floor(data.main.temp)) < 30) {
-                        setLogoKey("clear")
-                    } else {
-                        setLogoKey("heatwave")
+                    if (/clear/.test(weather)) {
+                        if (parseInt(Math.floor(data.main.temp)) < 30) {
+                            setLogoKey("clear")
+                        } else {
+                            setLogoKey("heatwave")
+                        }
+                        
+                    } else if (/cloud/.test(weather)) {
+                        setLogoKey("cloud")
+                    } else if (/snow/.test(weather)) {
+                        setLogoKey("snow")
+                    } else if (/rain/.test(weather)) {
+                        setLogoKey("rain")
+                    } else if (/wind/.test(weather)) {
+                        setLogoKey("windy")
+                    } else if (/fog/.test(weather)) {
+                        setLogoKey("fog")
+                    } else if (/thunder/.test(weather)) {
+                        setLogoKey("thunder")
                     }
-                    
-                } else if (/cloud/.test(weather)) {
-                    setLogoKey("cloud")
-                } else if (/snow/.test(weather)) {
-                    setLogoKey("snow")
-                } else if (/rain/.test(weather)) {
-                    setLogoKey("rain")
-                } else if (/wind/.test(weather)) {
-                    setLogoKey("windy")
-                } else if (/fog/.test(weather)) {
-                    setLogoKey("fog")
-                } else if (/thunder/.test(weather)) {
-                    setLogoKey("thunder")
                 }
+
+
+
+
+
+
             })
         }
     }

@@ -4,7 +4,7 @@ require("dotenv").config()
 module.exports = function(app) {
 
     app.post("/api/weather/local", (req, res) => {
-        console.log(req.body)
+
         const {lon, lat} = req.body
 
         fetch(`https://weather-proxy.freecodecamp.rocks/api/current?lon=${lon}&lat=${lat}`)
@@ -13,8 +13,6 @@ module.exports = function(app) {
                 res.json(data)
             })
 
-
-        
     })
 
     app.post("/api/weather/custom", (req, res) => {
@@ -25,16 +23,23 @@ module.exports = function(app) {
             .then(response => response.json())
             .then(data => {
 
-                let lat = data.data[0].latitude
-                let lon = data.data[0].longitude
+                if (data.data[0]) {
 
-                fetch(`https://weather-proxy.freecodecamp.rocks/api/current?lon=${lon}&lat=${lat}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        res.json(data)
-                    })
+                    let lat = data.data[0].latitude
+                    let lon = data.data[0].longitude
+    
+                    fetch(`https://weather-proxy.freecodecamp.rocks/api/current?lon=${lon}&lat=${lat}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            res.json(data)
+                        })
+
+                } else {
+                    res.json({error: "api error"})
+                }
+
+
             })
-        
         
     })
 }

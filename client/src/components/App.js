@@ -1,6 +1,9 @@
 import React, {useState, useEffect} from "react"
 import axios from "axios"
 import BASE_URL from "../constants"
+import GeneralInfo from "./GeneralInfo"
+import WeatherInfo from "./WeatherInfo"
+import Search from "./Search"
 
 
 const App = () => {
@@ -34,7 +37,6 @@ const App = () => {
 
                 axios.post(`${BASE_URL}/api/weather/local`, sendingData).then(response => {
                     const {data} = response
-                    console.log(data)
 
                     setCity(data.name)
                     setCountry(data.sys.country)
@@ -51,8 +53,6 @@ const App = () => {
 
                     setDay(dateArr.shift())
                     setDate(dateArr.join(" "))
-
-                    
 
                     let weather = (data.weather[0].main).toLowerCase()
 
@@ -93,7 +93,6 @@ const App = () => {
 
             axios.post(`${BASE_URL}/api/weather/custom`, sendingData).then(response => {
                 const {data} = response
-                console.log(data)
 
                 setCity(data.name)
                 setCountry(data.sys.country)
@@ -112,7 +111,6 @@ const App = () => {
                 setDate(dateArr.join(" "))
 
                 let weather = (data.weather[0].main).toLowerCase()
-                console.log(weather, "weather")
 
                 if (/clear/.test(weather)) {
                     if (parseInt(Math.floor(data.main.temp)) < 30) {
@@ -148,90 +146,37 @@ const App = () => {
                 </h1>
             </div>
             <div className="info-part">
-                <div className="general-info">
-                    <div className="city-name">
-                        <h2>
-                            {
-                                `${city}, ${country}`
-                            }
-                        </h2>
-                    </div>
-                    <div className="date-wrapper">
-                        <div className="day">
-                            <h2>
-                                {
-                                    day
-                                }
-                            </h2>
-                        </div>
-                        <div className="date">
-                            <h2>
-                                {
-                                    date
-                                }
-                            </h2>
-                        </div>
-                    </div>
-                    <div className="wind">
-                        <img src="images/wind.png" alt="wind logo"></img>
-                        <h2>
-                            {wind} km/h
-                        </h2>
-                    </div>
-                    <div className="humidity">
-                        <img src="images/humidity.png" alt="humidity icon"></img>
-                        <h2>
-                            {humid} %
-                        </h2>
-                    </div>
-                    <div className="cover"></div>
-                </div>
-                <div className="weather-info">
-                    <div className="reserved">
-                        <h2>
-                            {
-                                `${city}, ${country}`
-                            }
-                        </h2>
-                    </div>
-                    <div className="temp-part">
-                        <div className="temp-min-max">
-                            <div className="temp-min min-max">
-                                <img src="images/minTemp.png" alt="min temperature logo"></img>
-                                <h2>
-                                    {minTemp}°
-                                </h2>
-                            </div>
-                            <div className="temp-max min-max">
-                                <img src="images/maxTemp.png" alt="max temperature logo"></img>
-                                <h2>
-                                    {maxTemp}°
-                                </h2>
-                            </div>
-                        </div>
-                        <div className="temp-main">
-                            <h2>
-                                {temp}°
-                            </h2>
-                        </div>
-                    </div>
-                    <div className="icon-part">
-                        <img src={`images/${logoKey}.png`} alt="weather-logo"></img>
-                    </div>
-                    <div className="description">
-                        <h2>
-                            {
-                                descrip
-                            }
-                        </h2>
-                    </div>
-                </div>
+                <GeneralInfo
+                    data={{
+                        city: city,
+                        country: country,
+                        day: day,
+                        date: date,
+                        wind: wind,
+                        humid: humid
+                    }}
+                />
+
+                <WeatherInfo
+                    data={{
+                        city: city,
+                        country: country,
+                        minTemp: minTemp,
+                        maxTemp: maxTemp,
+                        temp: temp,
+                        logoKey: logoKey,
+                        descrip: descrip
+                    }}
+                />
             </div>
 
-            <div className="search-part">
-                <input name="coords" onChange={handleChange} value={adress} placeholder="Enter an adress..."></input>
-                <button name="coor-submit" onClick={handleClick}>Show the weather</button>
-            </div>
+            <Search
+                data={{
+                    handleChange: handleChange,
+                    handleClick: handleClick,
+                    adress: adress
+                }}
+            />
 
         </div>
     )

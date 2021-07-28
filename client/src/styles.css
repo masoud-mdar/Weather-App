@@ -60,9 +60,42 @@ img {
     
     }
 
+    .temp-min-max {
+        width: 20vw;
+        height: 15vh;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+
     .min-max {
         display: flex;
         align-items: center;
+    }
+
+    .reserved {
+        display: none;
+    }
+
+    .search-part input {
+        width: 15vw;
+        height: 7vh;
+        padding: 5px;
+        background: none;
+        border: 1px solid white;
+        border-radius: 5px;
+    }
+
+    .search-part button {
+        width: 10vw;
+        height: 7vh;
+        background: none;
+        border: 1px solid white;
+        border-radius: 5px;
+        font-family: monospace;
+        font-weight: bold;
+        color: white;
+        transition: 300ms;
     }
 }
 
@@ -71,8 +104,41 @@ img {
         display: none;
     }
 
+    .temp-min-max {
+        display: none;
+    }
+
     .min-max {
         display: none;
+    }
+
+    .reserved {
+        width: 75vw;
+        height: 10vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .search-part input {
+        width: 45vw;
+        height: 7vh;
+        padding: 3px;
+        background: none;
+        border: 1px solid white;
+        border-radius: 5px;
+    }
+
+    .search-part button {
+        width: 30vw;
+        height: 7vh;
+        background: none;
+        border: 1px solid white;
+        border-radius: 5px;
+        font-family: monospace;
+        font-weight: bold;
+        color: white;
+        transition: 300ms;
     }
 }
 
@@ -151,15 +217,6 @@ img {
     align-items: center;
 }
 
-.temp-min-max {
-    width: 20vw;
-    height: 15vh;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-}
-
-
 .temp-main {
     width: 30vw;
     height: 15vh;
@@ -191,14 +248,7 @@ img {
     background-image: linear-gradient(45deg,#008fa7, #008ea77a);
 }
 
-.search-part input {
-    width: 15vw;
-    height: 7vh;
-    padding: 5px;
-    background: none;
-    border: 1px solid white;
-    border-radius: 5px;
-}
+
 
 .search-part input::placeholder {
     font-family: monospace;
@@ -206,17 +256,7 @@ img {
     color: white;
 }
 
-.search-part button {
-    width: 10vw;
-    height: 7vh;
-    background: none;
-    border: 1px solid white;
-    border-radius: 5px;
-    font-family: monospace;
-    font-weight: bold;
-    color: white;
-    transition: 300ms;
-}
+
 
 .search-part button:hover {
     color: tomato;

@@ -187,6 +187,13 @@ const App = () => {
                     <div className="cover"></div>
                 </div>
                 <div className="weather-info">
+                    <div className="reserved">
+                        <h2>
+                            {
+                                `${city}, ${country}`
+                            }
+                        </h2>
+                    </div>
                     <div className="temp-part">
                         <div className="temp-min-max">
                             <div className="temp-min min-max">
